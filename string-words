@@ -1,0 +1,31 @@
+#include <iostream>
+#include <string>
+using namespace std;
+int main() 
+{
+    int j2=0;int j=0,gmax=0,imax=0;
+    string rech;
+  getline(cin,rech,'\n');
+  
+  string str[rech.length ()];
+  for (int i = 0; i < rech.length (); i++){ 
+     if (rech[i] == ' ' || rech[i] == '.' || rech[i] == ','){
+         for (int g=0; j < i;g++ ) {
+             str[j2]+=rech[j];
+             j++; 
+           if(g>gmax){
+         gmax=g;
+             imax=j2;
+         }   
+         }
+         j2++;
+     }
+}
+for (int i = 0; i < j2; i++) {
+cout << "словo "<<i+1<<" "<<str[i]<<"\n";
+}  
+if(imax==0)
+cout << "саmое bolshoe слово "<<str[imax]<<" его длиннa "<<str[imax].length();
+else
+cout << "саmое bolshoe слово "<<str[imax]<<" его длиннa "<<str[imax].length()-1;
+}
