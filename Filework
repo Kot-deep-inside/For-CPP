@@ -1,0 +1,97 @@
+
+#include <fstream>
+#include <iostream>
+#include <string>
+#include <Windows.h>
+#include < stdio.h >
+using namespace std;
+int sizeOfFile(fstream &fs) {
+    int i,h;
+    h= fs.tellg();
+    fs.seekg(0, ios_base::end);
+    i= fs.tellg();
+    fs.seekg(h, ios_base::beg);
+    return i;
+}
+int main()
+{
+    setlocale(LC_ALL, "");
+    string path = "myFile.txt";
+
+
+    fstream fs;
+    fs.open(path, fstream::in | fstream::out | fstream::app);
+    if (!fs.is_open())
+    {
+        cout << "Ошибка\n";
+    }
+    else
+    {
+        string msg;
+        int value;
+        cout << "Файл открыт\n";
+        cout << "Нажмите 1 для записи\n";
+        cout << "Нажмите 2 для чтения\n";
+        cout << "Нажмите 3 чтобы найти самое большое слово\n";
+        cin >> value;
+       
+        if (value==1)
+        {
+            SetConsoleCP(1251);
+            cout << "Вводи\n";
+            getline(cin, msg, '\n'); getline(cin, msg, '\n');
+            fs << msg << "\n";
+            SetConsoleCP(866);
+        }
+        if (value==2)
+        {
+            while (!fs.eof())
+            {
+                msg = "";
+                fs >> msg;
+                cout << msg << "\n";
+            }
+        }
+        if (value == 3)
+        {
+            int imax = 0;
+            string s,SSS;
+            for (fs >> s; !fs.eof(); fs >> s) { 
+            for (int i = 0; i < s.length(); i++)
+            {
+                if (imax<i) {
+                    imax = i;
+                    SSS = s;
+                }
+
+            }
+            
+        }
+        cout << "Word has a max size - '" << SSS << "'\tit's have size " << imax+1;
+    }
+        if (value == 4)
+        {
+            // ввести прізвища та ініціали студентів групи і відсортувати їх в алфавітному пордку
+            int j=0,k=0;
+            string s;
+            string *S= new string [sizeOfFile(fs)];
+            cout << "Виведення вiдсортованих данных:\n";
+            for (fs >> s; !fs.eof(); fs >> s,j++) {
+                S[j] = s;
+                k++;
+             }  
+            for (int i = 0; i < k; i++)
+                {
+                    // сортування в алф порядку
+                    S[i] > S[i + 1];
+                }                              
+                
+            for (int i = 0; i <k; i++)
+                {
+                        cout << S[i] << "\n";
+                }
+        } 
+    }  
+    fs.close();
+    return 0;
+}
