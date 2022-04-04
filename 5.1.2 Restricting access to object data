@@ -20,6 +20,9 @@ void setSide(double side) {
 		this->area = side * side;
 	}
 }
+void print(Square* square){
+	cout << "Square: side=" << square->getSide() << " area=" << square->getArea() << endl;
+}
 void setArea(double area) { this->area = area; }
 };
 Square::Square(double side)
@@ -27,17 +30,14 @@ Square::Square(double side)
 	this->side = side;
 	this->area = side * side;
 }
-void print(Square* square)
-{
-	cout << "Square: side=" << square->getSide() << " area=" << square->getArea() << endl;
-}
+
 int main()
 {
 	Square s(4);
-	print(&s);
+	s.print(&s);
 	s.setSide(2.0);
-	print(&s);
+	s.print(&s);
 	s.setSide(-33.0);
-	print(&s);
+	s.print(&s);
 		return 0;
 }
