@@ -1,0 +1,98 @@
+#include <iostream>
+#include <string>
+#include< windows.h >
+using namespace std;
+class ShopItemOrder
+{
+public:
+void set_item_name(string name);
+void set_item_price(double prise);
+void set_items_ordered(int item);
+string get_item_name(int con);
+double get_item_price(int con);
+int	get_items_ordered(int con);
+double get_sum(ShopItemOrder &order);
+void print_chek(ShopItemOrder &order);int counter =0;
+private:
+string *item_name = new string[50];
+double *item_price = new double[50];
+int	*items_ordered = new int[50];
+
+};
+void ShopItemOrder::set_item_name(string name) {counter++;
+	item_name[counter-1] = name;
+	
+};
+void ShopItemOrder::set_item_price(double prise) {
+	item_price[counter-1] = prise;
+};
+void ShopItemOrder::set_items_ordered(int item) {
+	items_ordered[counter-1] = item;
+};
+string ShopItemOrder::get_item_name(int con){
+	return item_name[con];
+};
+double ShopItemOrder::get_item_price(int con){
+	return item_price[con];
+};
+int ShopItemOrder::get_items_ordered(int con) {
+	return items_ordered[con];
+};
+double ShopItemOrder::get_sum(ShopItemOrder &order) {
+	double   sum = 0;
+	for (int i = 0; i < counter; i++)
+	{
+		sum += order.get_item_price(i)*order.get_items_ordered(i);
+	}
+	return sum;
+};
+
+void ShopItemOrder::print_chek(ShopItemOrder &order) {
+	
+	for (int i = 0; i < counter; i++)
+	{
+		cout << "Название: " << order.get_item_name(i);
+		cout << "\tЦена за штуку: " << order.get_item_price(i);
+		cout << "\tКол-во: " << order.get_items_ordered(i)<<"\n";
+	}
+	cout << "Итог: " << order.get_sum(order);
+};
+void seting(ShopItemOrder& order) {
+	string str; int in=0; double dob;
+
+			cout << "введите название товара\n";
+		getline(cin, str, '\n');//костыль
+		getline(cin, str, '\n');
+		order.set_item_name(str);
+
+		cout << "введите количество товара\n";
+		cin >> in;
+		order.set_items_ordered(in);
+
+		cout << "введите цену товара за одну еденицу\n";
+		cin >> dob;
+		order.set_item_price(dob);
+		
+		cout << "хотите закончить?\nда-0\nнет-1\n";
+		
+
+}
+int main() {
+	bool play = true; int i = 0;
+	setlocale(LC_ALL, "Russian");
+	cout << "Выбор языка\n0-Eng\n1-Рус\n";
+	cin >> i;
+	switch (i)
+	{
+	case 0: SetConsoleCP(866); break;
+	case 1: SetConsoleCP(1251); break;
+	default:SetConsoleCP(866);
+		break;
+	}
+	ShopItemOrder SSS;
+	while(play) {
+	seting(SSS);
+	cin >> play;
+}
+	SSS.print_chek(SSS);
+}
