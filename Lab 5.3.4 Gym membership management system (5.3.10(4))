@@ -1,0 +1,67 @@
+
+
+#include <iostream>
+
+using namespace std;
+class FitMember{
+    public:
+    void setValid(int valid){this->valid=valid;}
+    void setName(string name){this->name=name;}
+    int getId(){return id;}
+    private:
+    int id;
+    string name;
+    int valid;
+};
+int main()
+{int n=1,id;
+string command="";
+    FitMember member[n];
+    while(command!="quit"){
+    cout << "What would you like to do?: ";
+		cin >> command;
+		if (command == "quit")
+			break;
+
+		if(command!="create"||command!="cancel")cout << "Enter the number: ";
+		int numb;
+		if (command == "add")
+		{
+			cin >> numb;
+			cout << "Enter the Id: ";
+			cin >> id;
+			
+
+		}
+		else if (command == "cancel")
+		{
+			
+			cout << "Enter the Id: ";
+			cin >> id;
+			
+		}
+		else if (command == "create"){
+
+		    cout << "Enter the Id: ";
+		    cin >> id;
+		    for (int i = 1; i < 10; i++) {
+		        if(member[i].getId()==id){
+		        cout<<"Cannot perform this operation, this id is already in use\n";
+		           } break1=true;
+		        
+		    
+			if(break1==false){
+			    maxID++;
+		member[].setId(id);
+		    cout << "Provide flight capacity: ";
+            cin >> capacity;
+            member.setCapasity(capacity);
+			}else break1= false;
+		    }
+		}
+		else
+		{
+			printf("Cannot perform this operation, invalid command\n");
+		}
+    return 0;
+}
