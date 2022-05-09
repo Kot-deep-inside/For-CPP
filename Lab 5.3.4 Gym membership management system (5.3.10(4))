@@ -1,23 +1,32 @@
-
-
 #include <iostream>
 
 using namespace std;
 class FitMember{
     public:
+    void printStatus();
     void setValid(int valid){this->valid=valid;}
-    void setName(string name){this->name=name;}
+    void setName(char* name){this->name=name;}
     int getId(){return id;}
+    void setId(int id){this->id=id;}
     private:
     int id;
-    string name;
+    char* name;
     int valid;
 };
+void FitMember::printStatus(){
+    printf("Member %d: %s , subscription valid for %d months\n", this->id, this->name, this->valid);
+}
 int main()
-{int n=1,id;
+{int n=1,id,maxID=0,valid;
+bool break1=false;
 string command="";
+char* name;
     FitMember member[n];
     while(command!="quit"){
+         if(maxID!=0)
+for (int i = 1; i <= maxID; i++) {
+    member[i].printStatus();
+}
     cout << "What would you like to do?: ";
 		cin >> command;
 		if (command == "quit")
@@ -44,24 +53,29 @@ string command="";
 
 		    cout << "Enter the Id: ";
 		    cin >> id;
-		    for (int i = 1; i < 10; i++) {
+		     for (int i = 1; i < 10; i++) {
 		        if(member[i].getId()==id){
 		        cout<<"Cannot perform this operation, this id is already in use\n";
-		           } break1=true;
-		        
-		    
+		            break1=true;
+		        }
+		    }
 			if(break1==false){
 			    maxID++;
-		member[].setId(id);
-		    cout << "Provide flight capacity: ";
-            cin >> capacity;
-            member.setCapasity(capacity);
-			}else break1= false;
-		    }
-		}
-		else
+		member[maxID].setId(id);
+		    cout << "Provide member valid: ";
+            cin >> valid;
+            member[maxID].setValid(valid);
+			cout << "Provide member name: ";
+			   cin >> name; 
+			    member[maxID].setName(name);
+			}
+			else break1= false;
+		    }else
 		{
 			printf("Cannot perform this operation, invalid command\n");
 		}
+		}
+		
     return 0;
 }
+
