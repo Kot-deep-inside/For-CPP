@@ -1,0 +1,67 @@
+#include <iostream>
+#include <vector>
+#include <string>
+#include <stdio.h>
+#include <math.h>
+using namespace std;
+class Fraction{
+public:
+Fraction(int numerator, int denominator);
+string toString();
+double toDouble();
+int get_whole(){return this->whole;}
+private:
+int numerator;
+int whole;
+int denominator;
+};
+Fraction::Fraction(int numerator, int denominator)
+{
+	this->numerator = numerator;
+	this->denominator = denominator;
+	this->whole = 0;
+}
+string Fraction::toString()
+{
+	if (this->whole == 0)
+		return to_string(this->numerator) + " / " + to_string(this->denominator);
+	else
+		return to_string(this->whole) + " " + to_string(this->numerator) + " / " + to_string(this->denominator);
+}
+double Fraction::toDouble()
+{
+	double result = (double)this->numerator / (double)this->denominator;
+	return result;
+}
+vector<string> split(string line, char c)
+{
+	vector<string> result;
+	string tmpstr = "";
+	for (int i = 0; i < line.length(); i++)
+	{
+		if (line[i] != c)
+			tmpstr += line[i];
+		else
+		{
+			result.push_back(tmpstr);
+			tmpstr = "";
+		}
+	}
+
+	if (line[line.length() - 1] != ' ')
+		result.push_back(tmpstr);
+
+	return result;
+}
+int main(void) {
+int num, den;
+	char input[100];
+	cout << "Enter the fraction: ";
+	cin.getline(input, sizeof(input));
+	vector<string> out = split(input, ' ');
+	num = atoi(out[0].c_str());
+	den = atoi(out[2].c_str());
+	Fraction fraction(num, den);
+	cout << fraction.toString() << " is " << fraction.toDouble() << " in decimal" << endl;
+return 0;
+}
