@@ -1,0 +1,49 @@
+#include <iostream>
+using namespace std;
+class Node
+{
+public:
+Node(int val);
+int value;
+Node* next;};
+Node::Node(int val) : value(val), next(nullptr)
+{
+}
+
+class List
+{
+public:
+List();
+
+void push_front(int value);
+Node* getHead(){return head;}
+private:
+Node* head;
+};
+List::List() : head(nullptr)
+{
+}
+void List::push_front(int value)
+{
+Node* new_head = new Node(value);
+new_head->next = head;
+head=new_head;
+}
+void printList(Node* n)
+{
+    while (n != NULL) {
+        cout << n->value << "\n";
+        n = n->next;
+    }
+}
+int main()
+{
+List list;
+list.push_front(1);
+list.push_front(2);
+list.push_front(3);
+list.push_front(4);
+int value = 0;
+printList(list.getHead());
+return 0;
+}
