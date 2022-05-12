@@ -36,7 +36,7 @@ Fit::Fit(){id=0;valid=0;name="";}
 int main()
 {string comand="";
 Fit fit[10];
-string name;
+string name=" ";
 int id,valid,MaxId=0,eid,break1;
     while(true){
         break1=0;
@@ -48,7 +48,7 @@ int id,valid,MaxId=0,eid,break1;
             cout<<"give id\n";
             cin>>id;
             cout<<"set name\n";
-            cin>>name;
+           getline(cin, name, '\n');getline(cin, name, '\n');
            MaxId++;
             fit[MaxId].setId(id); 
             fit[MaxId].setName(name); 
