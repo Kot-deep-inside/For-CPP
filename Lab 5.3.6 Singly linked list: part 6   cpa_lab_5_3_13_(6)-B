@@ -22,7 +22,6 @@ class List
 {
 public:
 	List();
-	List(List &list);
 	void push_front(int value);
 	bool pop_front(int value);
 	Node* search(int value);
@@ -40,13 +39,6 @@ private:
 
 List::List() : head(nullptr), tail(nullptr)
 {
-}
-List::List(List &list) : head(nullptr), tail(nullptr)
-{
-	for (int i = 0; i < list.size(); i++)
-	{
-		this->push_back(list.at(i));
-	}
 }
 void printList(List list)
 {
