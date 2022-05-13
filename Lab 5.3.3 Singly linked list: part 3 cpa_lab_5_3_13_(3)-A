@@ -1,0 +1,101 @@
+#include <iostream>
+using namespace std;
+class Node
+{
+public:
+Node(int val);
+~Node();
+int value;
+Node* next;
+};
+Node::Node(int val) : value(val), next(nullptr)
+{
+
+}
+Node::~Node()
+{
+
+}
+class List
+{
+public:
+int caunterM;
+int caunterN;
+List();
+Node* getHead(){return head;}
+void push_front(int value);
+bool pop_front();
+Node* previous(Node* node);
+private:
+Node* head;
+};
+List::List() : head(nullptr)
+{
+}
+void List::push_front(int value)
+{
+    caunterM++;caunterN++;
+Node* new_head = new Node(value);
+new_head->next = head;
+head=new_head;
+}
+void printList(Node* n)
+{Node* g;
+cout<<n->value<<"\n";
+    while (n != NULL) {
+        cout<<n->value<<"\n";
+        g=n->next;
+      delete  n;
+        n = g->next;
+    }
+}
+Node* List::previous(Node* node)
+{
+	Node* prev = this->head;
+	while (prev != nullptr)
+	{
+		if (prev->next == node)
+		{
+			return prev;
+		}
+		prev = prev->next;
+	}
+	return nullptr;
+}
+bool List::pop_front()
+{
+	Node* currNode = getHead();
+	if (currNode != nullptr)
+	{
+		Node* prev = previous(currNode);
+		if (prev != nullptr)
+		{
+			prev->next = currNode->next;
+		}
+		else
+		{
+			this->head = currNode->next;
+		}
+		currNode->~Node();
+caunterN--;
+		return true;
+	}caunterM=caunterN;
+	return false;
+}
+int main()
+{
+List list;
+//
+for (int i = 0; i <= 5; i++)
+{
+list.push_front(i);
+cout << "pushed " << i << ", size: " << list.caunterN << endl;
+}
+cout << endl;
+for (int i = 0; i < 3; i++)
+{
+    int h=list.getHead()->value;
+list.pop_front();
+ cout << "popped " << h << ", size: " << list.caunterN << endl;
+}
+return 0;
