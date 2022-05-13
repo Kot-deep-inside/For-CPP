@@ -1,0 +1,173 @@
+#include <iostream>
+
+using namespace std;
+
+class Node
+{
+public:
+	Node(int val);
+	int value;
+	~Node();
+	Node* next;
+};
+Node::Node(int val) : value(val), next(nullptr)
+{
+
+}
+Node::~Node()
+{
+
+}
+class List
+{
+public:
+	List();
+	List(List &list);
+	void push_front(int value);
+	bool pop_front(int value);
+	Node* search(int value);
+	Node* previous(Node* node);
+	int size();
+	void push_back(int value);
+	int at(int index);
+
+private:
+	Node* head;
+	Node* tail;
+};
+
+List::List() : head(nullptr), tail(nullptr)
+{
+}
+List::List(List &list) : head(nullptr), tail(nullptr)
+{
+	for (int i = 0; i < list.size(); i++)
+	{
+		this->push_back(list.at(i));
+	}
+}
+void printList(List list)
+{
+	for (int i = 0; i < list.size(); i++)
+	{
+		cout << "list[" << i << "] == " << list.at(i) << endl;
+	}
+}
+int List::at(int index)
+{
+	int ind = 0;
+	Node* node = this->head;
+	while (node != nullptr)
+	{
+		if (ind == index)
+		{
+			return node->value;
+		}
+		node = node->next;
+		ind++;
+	}
+	return -1;
+}
+int List::size()
+{
+	int res = 0;
+	Node* node = this->head;
+	while (node != nullptr)
+	{
+		res++;
+		node = node->next;
+	}
+	return res;
+}
+
+void List::push_front(int value)
+{
+	Node* new_head = new Node(value);
+	new_head->next = head;
+	head = new_head;
+	if (this->size() == 1)
+	{
+		tail = new_head;
+	}
+}
+void List::push_back(int value)
+{
+	Node* node = new Node(value);
+	if (tail != nullptr)
+	{
+		Node* taill = search(tail->value);
+		taill->next = node;
+		this->tail = node;
+	}
+	else
+	{
+		head = node;
+		tail = node;
+	}
+}
+Node* List::search(int value)
+{
+	Node* node = this->head;
+	while (node != nullptr)
+	{
+		if (node->value == value)
+		{
+			return node;
+		}
+		node = node->next;
+	}
+	return nullptr;
+}
+Node* List::previous(Node* node)
+{
+	Node* prev = this->head;
+	while (prev != nullptr)
+	{
+		if (prev->next == node)
+		{
+			return prev;
+		}
+		prev = prev->next;
+	}
+	return nullptr;
+}
+bool List::pop_front(int value)
+{
+	Node* currNode = this->search(value);
+	if (currNode != nullptr)
+	{
+		Node* prev = previous(currNode);
+		if (prev != nullptr)
+		{
+			prev->next = currNode->next;
+		}
+		else
+		{
+			this->head = currNode->next;
+			this->tail = currNode->next;
+		}
+		currNode->~Node();
+		//delete currNode;
+		return true;
+	}
+	return false;
+}
+int main()
+{
+	
+	List list;
+	list.push_back(1);
+	list.push_back(2);
+	list.push_back(3);
+	list.push_back(4);
+	int value = 1;
+	while (list.pop_front(value))
+	{
+		cout << value << endl;
+		value++;
+	}
+
+	
+
+	return 0;
+}
