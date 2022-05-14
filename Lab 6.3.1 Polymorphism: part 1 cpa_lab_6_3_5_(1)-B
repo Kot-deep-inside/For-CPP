@@ -1,0 +1,109 @@
+#include <iostream>
+#include <vector>
+using namespace std;
+
+class Baza{
+
+public:
+	virtual void Draw(){
+		for (int i = 0; i < 4; i++)
+		{
+			if (i == 0)
+			{
+				cout << " ";
+			}
+			else if (i == 1)
+			{
+				cout << "/";
+			}
+			else if (i == 2)
+			{
+				cout << "\\";
+			}
+			else
+			{
+				cout << " " << endl;
+			}
+
+		}
+	}
+};
+class LineDraw : public Baza
+{
+	void Draw() override
+	{
+		Baza::Draw();
+		for (int i = 4; i < 8; i++)
+		{
+			if (i == 4 || i == 5)
+			{
+				cout << "/";
+			}
+			else if (i == 6)
+			{
+				cout << "\\";
+			}
+			else
+			{
+				cout << "\\" << endl;
+			}
+		}
+	}
+};
+class StarDraw : public Baza
+{
+	void Draw() override
+	{
+		Baza::Draw();
+		for (int i = 4; i < 8; i++)
+		{
+			if (i == 4)
+			{
+				cout << "/";
+			}
+			else if (i == 5 || i == 6)
+			{
+				cout << "*";
+			}
+			else
+			{
+				cout << "\\" << endl;
+			}
+		}
+	}
+};
+class PlusDraw : public Baza
+{
+	void Draw() override
+	{
+		Baza::Draw();
+		for (int i = 4; i < 8; i++)
+		{
+			if (i == 4)
+			{
+				cout << "/";
+			}
+			else if (i == 5 || i == 6)
+			{
+				cout << "+";
+			}
+			else
+			{
+				cout << "\\" << endl;
+			}
+		}
+	}
+};
+int main()
+{
+    Baza* b =new LineDraw();
+    Baza* b1=new StarDraw();
+    Baza* b2=new PlusDraw();
+    vector<Baza*> d3;
+    d3.push_back(b);d3.push_back(b1);d3.push_back(b2);
+    for (int i = 0; i < d3.size(); i++) { 
+        cout<<"Drawing "<< 1+i<<":\n";
+        d3[i]->Draw();
+    }
+    return 0;
+}
