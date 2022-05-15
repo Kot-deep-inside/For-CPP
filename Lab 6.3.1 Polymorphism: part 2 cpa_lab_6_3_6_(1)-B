@@ -1,0 +1,104 @@
+#include <iostream>
+#include <vector>
+using namespace std;
+class Piece{
+    public:
+    virtual bool canMove(char ch, int num){return 0;};
+};
+class Man : public Piece{
+    private:
+    int statusX;
+    char statusY;
+    public:
+    Man( char Y,int X){
+        statusX=X;
+        statusY=Y;
+    }
+    bool canMove(char ch, int num) override{
+        if(num==1+statusX){
+            switch(statusY){
+                case 'a':if(num==3||num==5||num==7)if(ch=='b')return true;
+                case 'b':if(num==2||num==4||num==6||num==8)if(ch=='a'||ch=='c')return true;
+                case 'c':if(num==3||num==5||num==7)if(ch=='b'||ch=='d')return true;
+                case 'd':if(num==2||num==4||num==6||num==8)if(ch=='c'||ch=='e')return true;
+                case 'e':if(num==3||num==5||num==7)if(ch=='f'||ch=='d')return true;
+                case 'f':if(num==2||num==4||num==6||num==8)if(ch=='e'||ch=='g')return true;
+                case 'g':if(num==3||num==5||num==7)if(ch=='f'||ch=='h')return true;
+                case 'h':if(num==2||num==4||num==6||num==8)if(ch=='g')return true;
+                
+            }
+        
+        }
+       return false; 
+    }
+};
+class King : public Piece{
+     private:
+    int statusX;
+    char statusY;
+    int integerY;
+    int integerYfin;
+    public:
+    King( char Y,int X){
+        statusX=X;
+        statusY=Y;
+    }
+    bool canMove(char ch, int num) override{
+            switch(statusY){
+                case 'a':integerY=1;break;
+                case 'b':integerY=2;break;
+                case 'c':integerY=3;break;
+                case 'd':integerY=4;break;
+                case 'e':integerY=5;break;
+                case 'f':integerY=6;break;
+                case 'g':integerY=7;break;
+                case 'h':integerY=8;break;
+            }switch(ch){
+                case 'a':integerYfin=1;break;
+                case 'b':integerYfin=2;break;
+                case 'c':integerYfin=3;break;
+                case 'd':integerYfin=4;break;
+                case 'e':integerYfin=5;break;
+                case 'f':integerYfin=6;break;
+                case 'g':integerYfin=7;break;
+                case 'h':integerYfin=8;break;
+            }
+         if(statusX<num&&integerY<integerYfin)  
+        for (int i = statusX; i < num; i++) {
+            statusX++;
+            integerY++;
+            if(statusX==num&&integerY==integerYfin)return true;
+        } 
+        if(statusX<num&&integerY>integerYfin)
+        for (int i = statusX; i < num; i++) {
+            statusX++;
+            integerY--;
+            if(statusX==num&&integerY==integerYfin)return true;
+        } 
+        if(statusX>num&&integerY>integerYfin)
+        for (int i = statusX; i > num; i--) {
+            statusX--;
+            integerY--;
+            if(statusX==num&&integerY==integerYfin)return true;
+        } 
+        if(statusX>num&&integerY<integerYfin)
+        for (int i = statusX; i > num; i++) {
+            statusX--;
+            integerY++;
+            if(statusX==num&&integerY==integerYfin)return true;
+        } 
+       return false; 
+    }
+};
+int main()
+{Piece* B= new Man('b',1);
+if(B->canMove('c',2))cout << "true\n";
+else cout << "false\n";
+    Piece* A= new King('b',1);
+    if(A->canMove('d',3))cout << "true\n";
+else cout << "false\n";
+    Piece* C= new Man('b',1);
+if(C->canMove('d',3))cout << "true\n";
+else cout << "false\n";
+    return 0;
+}
