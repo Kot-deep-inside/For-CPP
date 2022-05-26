@@ -3,29 +3,29 @@
 using namespace std;
 class Square
 {
-private:
-    double side;
-	double area;
-public:
-	Square(double side);
-double	getSide() {
+private://приватно все что под ним, нельзя получить к ним доступ на прямую из вне
+    double side; //сторона
+	double area; //площять (формула сторона * сторона)
+public://публично все что под ним
+	Square(double side); // конструктор, то что автоматически вызываеться при создании обьекта, тут в него надо сразу прии создании обькта вписавать сторону
+double	getSide() { //Гетер для стороны
 		return side;
 	}
-double	getArea() {
+double	getArea() {//Гетер для площяди
 	return area;
 	}
-void setSide(double side) {
-	if (side > 0) {
-		this->side = side;
-		this->area = side * side;
+void setSide(double side) { //Сетер для стороны
+	if (side > 0) { //что-то измениться только если сторона больше чем 0
+		this->side = side; //this->side ознчает пременну строны в самом классе, там сверху, а  side это переменная локальная, вон  в () этой функции создана, в ней то значение какое мы хотим присвоить стороне обьекта
+		this->area = side * side; //считаем площядь
 	}
 }
-void print(Square* square){
+void print(Square* square){ //вся таже функция вывода, классу Квадрата не принадлежит поэтому она принимает в себя обькт, делает указатель на него и получает доступ к его функциям
 	cout << "Square: side=" << square->getSide() << " area=" << square->getArea() << endl;
 }
-void setArea(double area) { this->area = area; }
+void setArea(double area) { this->area = area; } //тут можно ыручную площядь изменить но делать этого не надо
 };
-Square::Square(double side)
+Square::Square(double side) //конструктор класа Квадрата
 {
 	this->side = side;
 	this->area = side * side;
@@ -33,11 +33,11 @@ Square::Square(double side)
 
 int main()
 {
-	Square s(4);
-	s.print(&s);
-	s.setSide(2.0);
-	s.print(&s);
-	s.setSide(-33.0);
-	s.print(&s);
+	Square s(4);// Создание обькта Эс класса Квадрата и внего передаем сторону 4
+	s.print(&s); // виводим
+	s.setSide(2.0);// изменяем сторону на 2
+	s.print(&s);// выводим
+	s.setSide(-33.0);//изменяем сторону, но ничего не происходит так как значение меньше 0
+	s.print(&s);// выодим а ответ что и в прошлый раз
 		return 0;
 }
