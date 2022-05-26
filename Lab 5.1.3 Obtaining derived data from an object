@@ -10,15 +10,15 @@ public:
 	void set_side(double side);
 	double get_area();
 private:
-	double side;
+	double side;// тут есть переменная только стороны !!
 };
 void AdHocSquare::set_side (double side) {
 	this->side =side ;
 }
 double AdHocSquare::get_area() {
-	return side * side;
+	return side * side; //вот в таком формате выводим площядь, каждый раз пересчитывая её
 }
-class LazySquare
+class LazySquare// клас ленивого квадрата
 {
 public:
 	LazySquare(double side) {
@@ -28,20 +28,20 @@ public:
 	void set_side(double side);
 	double get_area();
 private:
-	double side;
-double area;
-	bool side_changed;
+	double side; //переменная стороны
+	double area; //переменная площяди
+	bool side_changed;//либо тру либо фолс (тру-1, фолс-0)
 };
 void LazySquare::set_side(double side) {	
 		this->side = side;
-		side_changed = 1;
+		side_changed = 1;//при изменении стороны пишем что произошло изменение 
 }
 double  LazySquare::get_area() {
-	if (side_changed ==1) {
-		area = 0;
-		area = side * side;		
+	if (side_changed ==1) { //если чтото меняли то пересчитываем все
+		area = 0; //обнуление площяди, хз зачем
+		area = side * side;// пишем новую площядь через формулу		
 	}
-	return area;
+	return area; //всерано изменилось чтото или нет возвращаем площядь
 };
 int main()
 {
@@ -57,3 +57,5 @@ int main()
 	cout << s2.get_area() << "\n";
 		return 0;
 }
+//прикол в том что В ленивом Квадрате если сторона не меняеться то считать даже ничено не надо
+//в обычном всегда когда выводим то высчитываем площядь, но зато не париться можно насчет того менялось чтото или нет
